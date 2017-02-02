@@ -15,7 +15,7 @@ Clone this repository: `$ git clone https://github.com/UNIZAR-30245-ARQS/web-cha
 On that directory, download the NodeJS dependencies for the client and the server: `$ npm install`
 
 # Run
-First of all, you need to set up an environment variable named `CLOUDAMQP_URL` with the URL of your RabbitMQ broker. If you don't set one, it will try to connect to a broker in `ampq://localhost`. If you are using an instance provided by CloudAQMP, your URL may be something like `amqp://USER:PASSWORD@spotted-monkey.rmq.cloudamqp.com/USER`.
+First of all, you need to set up an environment variable named `CLOUDAMQP_URL` with the URL of your RabbitMQ broker. If you don't set one, it will try to connect to a broker in `amqp://localhost`. If you are using an instance provided by CloudAQMP, your URL may be something like `amqp://USER:PASSWORD@spotted-monkey.rmq.cloudamqp.com/USER`.
 
 To run the chat server, open a terminal and `$ nodejs server.js` or `$ node server.js` depending on your version. 
 
