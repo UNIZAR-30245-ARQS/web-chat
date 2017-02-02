@@ -1,0 +1,17 @@
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.3'
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = "parser.TextParser"
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile('com.rabbitmq:amqp-client:3.4.1')    
+}
