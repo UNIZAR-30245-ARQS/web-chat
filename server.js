@@ -10,7 +10,7 @@ var socketio_server = require('./socketio_server.js');
 
 // Return the client (index.html) when a web browser points at the / path
 app.get('/', function(req, res){
-	res.sendFile(__dirname + '/index.html');
+	res.sendFile(__dirname + '/chatApplication.html');
 });
 
 // Launch the web server on the port 3000
