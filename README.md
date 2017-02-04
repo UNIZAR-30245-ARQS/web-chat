@@ -38,5 +38,10 @@ Besides improving the code, which is neither robust nor pretty, there are a few 
 - You could prevent swear words from reaching the other users of the chat. You will need to the design the system so the text parser must send an explicit "OK" for every message before it can be sent to the other chat users.
 - If you are a front-end person, make the GUI responsive. Currently it works fine on mobile browsers (barely tested on my own device Android/Firefox), but the GUI is difficult to use in small screens.
 
+# Architecture
+![A component-and-connector diagram of this application, with an emphasis on the publisher-subscriber architectural style](https://rbejar.github.io/images/arqs_webchat_pub-sub.png)
+
+
+
 # Credits
 The code is based on the examples in <http://socket.io/get-started/chat/>, <https://www.cloudamqp.com/docs/nodejs.html>, <https://github.com/squaremo/amqp.node> and <https://www.rabbitmq.com/tutorials/tutorial-one-java.html>.
