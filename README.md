@@ -21,7 +21,7 @@ Then, you need to set up another environment variable named `CHAT_HTTP_PORT` wit
 
 To run the chat server, open a terminal and `$ nodejs server.js` or `$ node server.js` depending on your version. 
 
-To run the chat clients, open a web browser and point it to the machine where the chat server is running, at port 3000. For example, if the web browser and the server are on the same machine, the URL will be <http://localhost:3000>. You can open as many tabs/windows as you want.
+To run the chat clients, open a web browser and point it to the machine where the chat server is running, at the right port (3000 by default). For example, if the web browser and the server are on the same machine and the default port is used, the URL will be <http://localhost:3000>. You can open as many tabs/windows as you want.
 
 At that point you can start to chat, but the text parser which is looking for swear words is not yet running.
 
