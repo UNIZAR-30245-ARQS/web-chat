@@ -6,7 +6,7 @@
 
 var app = require('express')();
 var http = require('http').Server(app);
-var socketio_channel = require('./socketio_channel.js');
+var socketio_server = require('./socketio_server.js');
 
 // Return the client (index.html) when a web browser points at the / path
 app.get('/', function(req, res){
@@ -18,4 +18,4 @@ http.listen(3000, function(){
 	console.log('listening on *:3000');
 });
 
-socketio_channel.startSocketIOChannel(http);
+socketio_server.startSocketIOChannel(http);
