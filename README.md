@@ -17,6 +17,8 @@ On that directory, download the NodeJS dependencies for the client and the serve
 # Run
 First of all, you need to set up an environment variable named `CLOUDAMQP_URL` with the URL of your RabbitMQ broker. If you don't set one, it will try to connect to a broker in `amqp://localhost`. If you are using an instance provided by CloudAQMP, your URL may be something like `amqp://USER:PASSWORD@spotted-monkey.rmq.cloudamqp.com/USER`.
 
+Then, you need to set up another environment variable named `CHAT_HTTP_PORT` with the port for the http server. If this variable is not found, the port 3000 is used by default.
+
 To run the chat server, open a terminal and `$ nodejs server.js` or `$ node server.js` depending on your version. 
 
 To run the chat clients, open a web browser and point it to the machine where the chat server is running, at port 3000. For example, if the web browser and the server are on the same machine, the URL will be <http://localhost:3000>. You can open as many tabs/windows as you want.
