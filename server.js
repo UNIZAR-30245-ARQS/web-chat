@@ -19,7 +19,7 @@ if (process.env.CHAT_HTTP_PORT) {
 	}
 }    
 
-// Return the client (index.html) when a web browser points at the / path
+// Return the client (chat_application.html) when a web browser points at the / path
 app.get('/', function(req, res){
 	res.sendFile(__dirname + '/chat_application.html');
 });
