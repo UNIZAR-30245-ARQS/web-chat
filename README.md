@@ -34,9 +34,9 @@ The system can be fully distributed. You can run the chat server, the chat clien
 # Improvements
 Besides improving the code, which is neither robust nor pretty, there are a few things that you can try to improve the functionality of the system. Some examples:
 
-- You can add other text parsers, which look for other words and run on their own machines. You will need to think about the type of exchange that you need to use in RabbitMQ for all the messages in a queue to reach several different parsers. Some of these parsers can be written in a third programming language, using the proper RabbitMQ libraries.
+- You can add other text parsers, which look for other words and maybe run on their own machines. Some of these parsers can be written in a third programming language, using the proper RabbitMQ libraries.
 - You could prevent swear words from reaching the other users of the chat. You will need to the design the system so the text parser must send an explicit "OK" for every message before it can be sent to the other chat users.
-- If you are a front-end person, make the GUI responsive. Currently it works fine on mobile browsers (barely tested on my own device Android/Firefox), but the GUI is difficult to use in small screens.
+- If you are a front-end person, make the GUI responsive. Currently it works correctly on mobile browsers (barely tested on my own device Android/Firefox), but the GUI is difficult to use in small screens.
 
 # Architecture
 ![A component-and-connector diagram of this application, with an emphasis on the publisher-subscriber architectural style](https://rbejar.github.io/images/arqs_webchat_pub-sub.png)

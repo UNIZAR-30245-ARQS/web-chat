@@ -33,7 +33,9 @@ function whenConnected() {
 
 var pubChannel = null;
 var offlinePubQueue = [];
-// The publisher sends the chat messages to QUEUE_NAME in the AQMP broker
+// The publisher sends the chat messages to the EXCHANGE_NAME exchange in the AQMP broker.
+// These messages must be pushed to offlinePubQueue for this to work, something which
+// is done in the publish(exchange, key, content...) function
 function startPublisher() {
 	amqpConn.createConfirmChannel(function(err, ch) {
 		if (closeOnErr(err)) return;
@@ -43,8 +45,14 @@ function startPublisher() {
 		ch.on("close", function() {
 			console.log("[AMQP] channel closed");
 		});		
+		
+		// A fanout exchange. Not durable (i.e. won't survive a broker restart)		
+		ch.assertExchange(consts.EXCHANGE_NAME, 'fanout', {durable: false});
+		
 		ch.prefetch(5);
-		ch.assertQueue(consts.QUEUE_NAME, { durable: true }, function(err, _ok) {
+		
+		// A non durable queue with a random name will do
+		ch.assertQueue("", function(err, _ok) {
 			if (closeOnErr(err)) return;      
 		});		
 		pubChannel = ch;
@@ -86,6 +94,9 @@ function startSubscriber() {
 		ch.on("close", function() {
 			console.log("[AMQP] channel closed");
 		});
+		
+		// A fanout exchange. Not durable (i.e. won't survive a broker restart)		
+		ch.assertExchange(consts.EXCHANGE_NAME, 'fanout', {durable: false});
 		
 		ch.prefetch(5);
 		

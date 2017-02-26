@@ -8,9 +8,8 @@ import com.rabbitmq.client.QueueingConsumer;
 /** 
  * @author Rubén Béjar <http://www.rubenbejar.com>
  */
-public class TextParser {
-
-	private final static String QUEUE_NAME = "chat_messages";
+public class TextParser {	
+	private final static String EXCHANGE_NAME = "messages_fanout_exchange";
 	private final static String BANNED_QUEUE_NAME = "banned_users";
 	private final static String ENV_AMQPURL_NAME = "CLOUDAMQP_URL";
 
@@ -28,11 +27,14 @@ public class TextParser {
 		Connection connection = factory.newConnection();
 		// With a single channel
 		Channel channel = connection.createChannel();		
-		// We declare a queue in the broker named QUEUE_NAME
+		// Declare a fanout exchange (non durable by default)
+		channel.exchangeDeclare(EXCHANGE_NAME, "fanout");
+		// A queue to receive the the messages through the fanout exchange
+		String queueName = channel.queueDeclare().getQueue();
+		channel.queueBind(queueName, EXCHANGE_NAME, "");
+		// We declare another queue for the bans		
 		// Durable (persists even between crashes of the broker) and non-exclusive (it
-		// must be accessed from other connections too)
-		channel.queueDeclare(QUEUE_NAME, true, false, false, null);
-		// Another one for the "bans"
+		// must be accessed from other connections too)		
 		channel.queueDeclare(BANNED_QUEUE_NAME, true, false, false, null);
 		System.out.println(" [*] Waiting for messages. CTRL+C to exit");					
 		
@@ -40,7 +42,7 @@ public class TextParser {
 		// the QUEUE_NAME queue until we read them
 		QueueingConsumer consumer = new QueueingConsumer(channel);
 		// autoAck is true (ack is automatic as soon as the message is delivered to consumer)
-		channel.basicConsume(QUEUE_NAME, true, consumer);
+		channel.basicConsume(queueName, true, consumer);
 
 		while (true) {
 			// Blocks until a message arrives

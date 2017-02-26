@@ -12,7 +12,7 @@ function startSocketIOChannel(http) {
 			// Send it to the messaging middleware (AMQP broker) too so the text parser can receive and process it.
 			// We use the client id as a correlation id.
 			// Separating them with ":" is not a robust encoding of id+msg, but it is very easy to parse on the other side.
-			amqpbridge.publish("", consts.QUEUE_NAME, new Buffer(socket.id + ":" + msg));
+			amqpbridge.publish(consts.EXCHANGE_NAME, "", new Buffer(socket.id + ":" + msg));
 		});
 	});
 	
