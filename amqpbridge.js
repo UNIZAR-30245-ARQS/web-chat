@@ -32,7 +32,8 @@ function whenConnected() {
 
 
 var pubChannel = null;
-var offlinePubQueue = [];
+var offlinePubQueue = []; // Used to keep messages that couldn't be delivered, so we can
+// tray again later.
 // The publisher sends the chat messages to the EXCHANGE_NAME exchange in the AQMP broker.
 // These messages must be pushed to offlinePubQueue for this to work, something which
 // is done in the publish(exchange, key, content...) function
@@ -93,10 +94,7 @@ function startSubscriber() {
 		
 		ch.on("close", function() {
 			console.log("[AMQP] channel closed");
-		});
-		
-		// A fanout exchange. Not durable (i.e. won't survive a broker restart)		
-		ch.assertExchange(consts.EXCHANGE_NAME, 'fanout', {durable: false});
+		});				
 		
 		ch.prefetch(5);
 		
