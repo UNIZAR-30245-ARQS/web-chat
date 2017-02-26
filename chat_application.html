@@ -31,9 +31,15 @@
     socket.on('chat message', function(msg){
         $('#messages').append($('<li class="list-group-item">').text(msg));
     });
-    socket.on('ban message', function(msg){        
-        $('#messages').empty();
-        $('#messages').append($('<li class="list-group-item">').text("YOU HAVE BEEN BANNED FROM THIS CHAT BECAUSE: " + msg));
+    socket.on('ban message', function(msg){                
+        var msg_contents = msg.split(":"); // msg format is id:text
+        var ban_id = msg_contents[0];
+        var ban_msg = msg_contents[1];        
+        if (ban_id == socket.id) {
+            $('#messages').empty();
+            $('#messages').append($('<li class="list-group-item">').text("YOU HAVE BEEN BANNED FROM THIS CHAT BECAUSE: " + ban_msg));
+            socket.disconnect();
+        }                       
     });
     </script>
   </body>

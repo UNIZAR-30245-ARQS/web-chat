@@ -4,11 +4,6 @@ var consts = require('./consts.js');
 // To keep track of the clients
 var clientSockets = new Array();
 
-function disconnectBadClient(id) {
-	clientSockets[id].emit('ban message','IMPROPER LANGUAGE');
-	clientSockets[id].disconnect();         
-}
-
 function startSocketIOChannel(http) {
 	var io = require('socket.io')(http);
 	io.on('connection', function(socket){
@@ -29,7 +24,11 @@ function startSocketIOChannel(http) {
 			amqpbridge.publish("", consts.QUEUE_NAME, new Buffer(socket.id + ":" + msg));
 		});
 	});
-
+	
+	function disconnectBadClient(id) {		
+		io.emit('ban message',id+':IMPROPER LANGUAGE');		
+	}
+	
 	amqpbridge.setBadClientBehavior(disconnectBadClient);
 	// Launch the connection to the AMQP Broker
 	amqpbridge.startAMQP();
