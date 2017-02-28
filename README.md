@@ -39,9 +39,13 @@ Besides improving the code, which is neither robust nor pretty, there are a few 
 - If you are a front-end person, make the GUI responsive. Currently it works correctly on mobile browsers (barely tested on my own device Android/Firefox), but the GUI is difficult to use in small screens.
 
 # Architecture
+## Component and connector diagram
+With an emphasis in the pub-sub style.
 ![A component-and-connector diagram of this application, with an emphasis on the publisher-subscriber architectural style](https://rbejar.github.io/images/arqs_webchat_pub-sub.png)
 
-
+## Deployment diagram
+A possible deployment with two people chatting from different computers, the web server with socket.io and the amqpbridge, the RabbitMQ broker in a different machine, and the Text Parser in another one.
+![A possible deployment of this application](https://rbejar.github.io/images/arqs_webchat_pub-sub_deployment.png)
 
 # Credits
-The code is based on the examples in <http://socket.io/get-started/chat/>, <https://www.cloudamqp.com/docs/nodejs.html>, <https://github.com/squaremo/amqp.node> and <https://www.rabbitmq.com/tutorials/tutorial-one-java.html>.
+Part of the code is based on the examples in <http://socket.io/get-started/chat/>, <https://www.cloudamqp.com/docs/nodejs.html>, <https://github.com/squaremo/amqp.node> and <https://www.rabbitmq.com/tutorials/tutorial-one-java.html>.
